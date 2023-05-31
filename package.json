@@ -1,0 +1,9 @@
+{
+  "name": "verivox-interview-task",
+  "scripts": {
+    "start": "npx tsc && node src/main.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
