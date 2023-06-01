@@ -1,20 +1,33 @@
-import { Product } from "./product";
-import { CalculationModelFn, IProduct } from "./product.model";
-import { ITariffComparison } from "./tariff-comparison.model";
-import { TariffComparison } from "./tariff-comparison";
+import { TCalculationModelFn, ITariff } from "./tariff/tariff.model";
+import { Tariff } from "./tariff/tariff";
+import { ITariffComparison } from "./tariff-comparison/tariff-comparison.model";
+import { TariffComparison } from "./tariff-comparison/tariff-comparison";
+import {
+  BasicTariffCoefficients,
+  PackagedTariffCoefficients,
+} from "./constants/calculation-model-coefficients.cons";
 
-const basicTariffCalculationModel: CalculationModelFn = (
+const basicTariffCalculationModel: TCalculationModelFn = (
   consumption: Readonly<number>
-) => +(60 + consumption * 0.22).toFixed(2);
-const packagedTariffCalculationModel: CalculationModelFn = (
+) =>
+  +(
+    BasicTariffCoefficients.FIXED_COSTS +
+    consumption * BasicTariffCoefficients.COSTS_PER_KWH
+  ).toFixed(2);
+const packagedTariffCalculationModel: TCalculationModelFn = (
   consumption: Readonly<number>
-) => +(800 + Math.max(consumption - 4000, 0) * 0.3).toFixed(2);
+) =>
+  +(
+    PackagedTariffCoefficients.FIXED_COSTS +
+    Math.max(consumption - PackagedTariffCoefficients.FIXED_CONSUMPTION, 0) *
+      PackagedTariffCoefficients.COSTS_PER_KWH
+  ).toFixed(2);
 
-const basicTariff: Readonly<IProduct> = new Product(
+const basicTariff: Readonly<ITariff> = new Tariff(
   "Basic electricity tariff",
   basicTariffCalculationModel
 );
-const packagedTariff: Readonly<IProduct> = new Product(
+const packagedTariff: Readonly<ITariff> = new Tariff(
   "Packaged tariff",
   packagedTariffCalculationModel
 );
