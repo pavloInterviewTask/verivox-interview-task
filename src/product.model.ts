@@ -1,10 +1,12 @@
-import { IOffer } from './offer.model';
+import { IOffer } from "./offer.model";
 
 export interface IProduct {
-    name: Readonly<string>;
-    getOffer: GetOffer;
-    calculationModel: CalculationModel;
+  name: Readonly<string>;
+  getOffer: GetOfferFn;
+  calculationModel: CalculationModelFn;
 }
 
-export type CalculationModel = (consumption: Readonly<number>) => Readonly<number>;
-export type GetOffer = (consumption: Readonly<number>) => IOffer;
+export type CalculationModelFn = (
+  consumption: Readonly<number>
+) => Readonly<number>;
+export type GetOfferFn = (consumption: Readonly<number>) => Readonly<IOffer>;

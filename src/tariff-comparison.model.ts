@@ -1,9 +1,9 @@
-import { Offers } from './offer.model';
-import { IProduct } from './product.model';
+import { Offers } from "./offer.model";
+import { IProduct } from "./product.model";
 
 export interface ITariffComparison {
-    tariffs: ReadonlyArray<IProduct>;
-    getOffers: GetOffers;
+  tariffs: ReadonlyArray<IProduct>;
+  getOffers: GetOffersFn;
 }
 
-export type GetOffers = (consumption: Readonly<number>) => Offers;
+export type GetOffersFn = (consumption: Readonly<number>) => Offers;

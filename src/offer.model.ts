@@ -1,8 +1,8 @@
 export interface IOffer {
-    name: Readonly<string>;
-    annualCosts: Readonly<string>;
-    getNumberAnnualCosts: GetNumericAnnualCosts;
+  name: Readonly<string>;
+  annualCosts: Readonly<string>;
+  getNumericAnnualCosts: GetNumericAnnualCostsFn;
 }
 
 export type Offers = ReadonlyArray<IOffer>;
-export type GetNumericAnnualCosts = () => Readonly<number>;
+export type GetNumericAnnualCostsFn = () => Readonly<number>;
